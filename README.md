@@ -1,109 +1,117 @@
-# Proyecto de Análisis de Datos
+# Criminalidad reportada en Santiago de Cali
 
-## Descripción
-Este proyecto está diseñado para procesar, analizar y modelar datos mensuales recopilados desde noviembre de 2022 hasta marzo de 2024. El flujo de trabajo incluye la descarga de datos, consolidación, limpieza, análisis exploratorio de datos (EDA) y modelado predictivo.
+Proyecto académico de ciencia de datos para auditar, preparar y explorar fuentes
+agregadas de SIEDCO y población municipal del DANE. La implementación actual
+llega únicamente hasta las preguntas 1–5 del EDA criminal-temporal.
 
-## Estructura del Proyecto
+## Estado
 
+- Ingesta y trazabilidad por fuente: implementada para ejecución en Google Colab.
+- Consolidación y calidad: implementadas con validaciones que bloquean resultados
+  no confiables.
+- EDA: limitado deliberadamente a las preguntas 1–5.
+- Modelado: no implementado; el notebook 04 solo define puertas de calidad y una
+  estrategia temporal futura.
+- API y aplicación web: no implementadas.
+
+No se incluyen resultados numéricos en Git porque los datos de Drive no están
+disponibles en este entorno de desarrollo.
+
+## Fuentes y grano
+
+Entradas esperadas:
+
+- Ocho CSV SIEDCO en
+  `MyDrive/datav3/A1 - SIEDCO/datos_criminalidad_cali`.
+- Uno o más Excel de población DANE bajo `MyDrive/datav3`.
+
+Las filas SIEDCO son agregados. Por tanto:
+
+- una fila no equivale a un delito individual;
+- los totales se calculan con `sum(cantidad)`;
+- Cali se filtra fuente por fuente mediante `cod_muni = 76001` o
+  `codigo_dane = 76001000`;
+- el nombre del municipio es solo una validación secundaria.
+
+`Hurto por Modalidades` se trata como fuente complementaria. Sus registros de
+Hurto a Personas se excluyen de la tabla canónica para evitar doble conteo. Solo
+se incorporan las categorías de residencias, comercio, motocicletas y
+automotores cuando la etiqueta de origen permite identificarlas.
+
+## Ejecución en Google Colab
+
+1. Abra Colab con la misma cuenta que tiene acceso a Drive.
+2. Clone o abra este repositorio en Colab.
+3. Ejecute los notebooks completos, en orden:
+
+   1. `src/00_descargas.ipynb`
+   2. `src/01_consolidar.ipynb`
+   3. `src/02_limpieza.ipynb`
+   4. `src/03_EDA.ipynb`
+   5. `src/04_modelo.ipynb`
+
+4. Autorice `drive.mount("/content/drive")`.
+5. Confirme que cada notebook termina sin una excepción de control.
+6. Revise primero los archivos de `audit/` antes de interpretar el EDA.
+
+Las salidas reproducibles se escriben exclusivamente en:
+
+```text
+MyDrive/datav3/project_diplodata_outputs/eda_01_05_v1/
+├── landing/
+├── trusted/
+├── surface/
+├── audit/
+└── reportes/
 ```
-.
-├── src                   # Código fuente (cuadernos Jupyter)
-├── data                  # Directorio para todos los datos
-│   ├── raw               # Datos brutos organizados por año y mes
-│   ├── landing           # Datos consolidados sin procesar
-│   ├── trusted           # Datos limpios listos para análisis y modelado
-│   └── surface           # Datos organizados para compartir con usuarios
-├── api                   # API para servir el modelo 
-├── reportes              # Informes generados y visualizaciones
-└── webapp                # Aplicación web para visualizar resultados
-```
 
-## Flujo de trabajo
+Las fuentes originales no se sobrescriben. Cambiar el identificador
+`eda_01_05_v1` en todos los notebooks permite conservar una ejecución separada.
 
-El proyecto sigue un flujo de trabajo secuencial implementado en varios cuadernos Jupyter:
+## Preguntas EDA implementadas
 
-1. **Descarga de datos** (`00_descargas.ipynb`): Proceso para obtener los datos desde la fuente original.
-2. **Consolidación** (`01_consolidar.ipynb`): Integración de los archivos mensuales en un solo conjunto de datos.
-3. **Limpieza de datos** (`02_limpieza.ipynb`): Preprocesamiento para manejar valores faltantes, outliers y transformaciones.
-4. **Análisis Exploratorio de Datos** (`03_EDA.ipynb`): Visualizaciones y estadísticas descriptivas.
-5. **Modelado** (`04_modelos.ipynb`): Desarrollo e implementación de modelos predictivos.
+El notebook 03 conserva el texto y la intención de las primeras cinco preguntas
+del documento de requisitos:
 
-## Datos
+1. distribución total por tipo de delito;
+2. tasas por 100.000 habitantes;
+3. evolución y tendencia 2018–2025;
+4. número de categorías crecientes, estables/no concluyentes o decrecientes;
+5. extremos de homicidios y hurto a personas y patrones temporales comunes.
 
-Los datos están organizados de la siguiente manera:
+Las tasas se calculan por año usando población del mismo año. El resumen del
+período usa personas-año y solo compara categorías con cobertura completa.
 
-- **raw**: Datos crudos (tal cual se descargan), archivos de ejemplo en formato Excel
-- **landing**: Datos consolidados de todas las fuentes, sin más procesamiento
-- **trusted**: Datos limpios, normalizados, estandarizados, etc. listos para análisis
-- **surface**: Datos organizados para compartir con usuarios
+## Reproducibilidad y controles
 
-## Requisitos
+- Los inventarios guardan ruta, tamaño y SHA-256 de cada fuente.
+- Las fechas se convierten fuente por fuente y los fallos quedan cuantificados.
+- Los duplicados exactos y repeticiones agregadas ambiguas se reportan, pero no
+  se eliminan automáticamente.
+- Los archivos DANE se validan por código municipal, año y población positiva.
+- Valores DANE conflictivos para un mismo año bloquean el cálculo de tasas.
+- No se rellenan meses o años ausentes con cero sin evidencia de cobertura.
+- El notebook 04 no entrena modelos ni usa particiones aleatorias.
 
-Para ejecutar este proyecto necesitarás:
+## Validación en este repositorio
 
-```
-python>=3.12
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
-jupyter
-```
-
-## Instalación
-
-1. Crear un **fork** de este repositorio, cambia el nombre según el tema de tu proyecto:
-
-    Esto crea una copia en tu cuenta de GitHub: 
-
-    `https://github.com/dfmarin/proyecto_diplomado`
-
-2. Clona el repositorio de tu proyecto (el **fork** que hicieron):
-
-    ```bash
-    git clone https://github.com/usuario/nombre-del-proyecto.git
-    cd nombre-del-proyecto
-    ```
-
-2. Crea un entorno virtual e instala las dependencias:
-
-    ```bash
-    python -m venv venv
-    pip install -r requirements.txt
-    ```
-
-## Uso
-
-Ejecuta los cuadernos Jupyter en orden:
+Sin acceso al Drive del proyecto solo se puede validar estructura y sintaxis:
 
 ```bash
-jupyter notebook src/00_descargas.ipynb
+python -m pip install -r requirements.txt
+python -m compileall src
 ```
 
-Continúa con los siguientes cuadernos siguiendo el flujo de trabajo numerado.
+Los notebooks deben validarse finalmente en Colab con **Entorno de ejecución →
+Ejecutar todas**. Una ejecución completa debe producir los inventarios, tablas y
+figuras en la carpeta de salida de Drive sin editar las entradas.
 
-## API
+## Estructura
 
-La API proporciona acceso a las predicciones del modelo. Consulta la documentación en el directorio `api` para más detalles sobre los endpoints disponibles y su uso.
-
-## Aplicación Web
-
-La aplicación web permite visualizar los resultados y las predicciones del modelo de manera interactiva. Consulta el README en el directorio `webapp` para instrucciones de instalación y uso.
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Por favor, sigue estos pasos:
-
-1. Haz fork del repositorio
-2. Crea una rama para tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`)
-3. Haz commit de tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Crea un Pull Request
-
-## Contacto
-
-[Tu nombre] - [tu.email@ejemplo.com]
-
-Enlace del proyecto: [https://github.com/usuario/nombre-del-proyecto](https://github.com/usuario/nombre-del-proyecto)
-
+```text
+src/       notebooks 00–04
+data/      estructura local vacía; los datos no se versionan
+reportes/  documentación técnica, no resultados generados
+api/       alcance futuro
+webapp/    alcance futuro
+```
