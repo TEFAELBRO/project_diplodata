@@ -4,6 +4,24 @@ Proyecto académico de ciencia de datos para auditar, preparar y explorar fuente
 agregadas de SIEDCO y población municipal del DANE. La implementación actual
 llega únicamente hasta las preguntas 1–5 del EDA criminal-temporal.
 
+## Propuesta de valor
+
+El producto se plantea como un **sistema reproducible de vigilancia temporal de
+la criminalidad reportada en Cali**. Su aporte diferencial es convertir fuentes
+agregadas en evidencia trazable para:
+
+- reconocer qué categorías concentran más reportes;
+- comparar tasas anuales con denominadores poblacionales consistentes;
+- detectar cambios temporales que requieren revisión;
+- documentar las limitaciones antes de apoyar una decisión;
+- habilitar, solo después de superar controles de calidad, un pronóstico mensual
+  de homicidios para planeación y seguimiento.
+
+El alcance no estima riesgo individual ni riesgo por comuna o barrio. Tampoco
+recomienda despliegues operativos automáticos. Esta delimitación distingue el
+producto de propuestas de mapas de riesgo territorial y reduce el riesgo de
+estigmatizar zonas o comunidades.
+
 ## Estado
 
 - Ingesta y trazabilidad por fuente: implementada para ejecución en Google Colab.
@@ -81,6 +99,13 @@ del documento de requisitos:
 
 Las tasas se calculan por año usando población del mismo año. El resumen del
 período usa personas-año y solo compara categorías con cobertura completa.
+Cada pregunta conserva la secuencia solicitada para la socialización:
+**Pregunta → Código → Respuesta → Guía de interpretación → Interpretación o
+conclusión → Decisión que apoya**.
+
+La diferenciación frente al proyecto de seguridad de Bucaramanga y las notas
+extraídas de la socialización se documentan en
+`reportes/DIFERENCIACION_PRODUCTO.md`.
 
 ## Reproducibilidad y controles
 
