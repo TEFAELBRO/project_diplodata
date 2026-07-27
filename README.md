@@ -66,7 +66,13 @@ automotores cuando la etiqueta de origen permite identificarlas.
 
 1. Abra Colab con la misma cuenta que tiene acceso a Drive.
 2. Clone o abra este repositorio en Colab.
-3. Ejecute los notebooks completos, en orden:
+3. Instale las dependencias desde una celda ubicada en la raíz del repositorio:
+
+   ```python
+   %pip install -r requirements.txt
+   ```
+
+4. Ejecute los notebooks completos, en orden:
 
    1. `src/00_descargas.ipynb`
    2. `src/01_consolidar.ipynb`
@@ -74,9 +80,10 @@ automotores cuando la etiqueta de origen permite identificarlas.
    4. `src/03_EDA.ipynb`
    5. `src/04_modelo.ipynb`
 
-4. Autorice `drive.mount("/content/drive")`.
-5. Confirme que cada notebook termina sin una excepción de control.
-6. Revise primero los archivos de `audit/` antes de interpretar el EDA.
+5. Autorice `drive.mount("/content/drive")`.
+6. Confirme que cada notebook termina sin una excepción de control.
+7. Revise primero los archivos de `audit/` antes de interpretar el EDA o el
+   modelo.
 
 Las salidas reproducibles se escriben exclusivamente en:
 
