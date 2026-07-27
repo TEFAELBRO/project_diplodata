@@ -33,8 +33,9 @@ estigmatizar zonas o comunidades.
 - Consolidación y calidad: implementadas con validaciones que bloquean resultados
   no confiables.
 - EDA: limitado deliberadamente a las preguntas 1–5.
-- Modelado: no implementado; el notebook 04 solo define puertas de calidad y una
-  estrategia temporal futura.
+- Modelado: implementado para ejecución condicionada en Colab. El notebook 04
+  compara una regresión de Poisson regularizada y un bosque aleatorio contra un
+  baseline estacional, con validación temporal y prueba final separada.
 - API y aplicación web: no implementadas.
 
 No se incluyen resultados numéricos en Git porque los datos de Drive no están
@@ -121,7 +122,9 @@ extraídas de la socialización se documentan en
 - Los archivos DANE se validan por código municipal, año y población positiva.
 - Valores DANE conflictivos para un mismo año bloquean el cálculo de tasas.
 - No se rellenan meses o años ausentes con cero sin evidencia de cobertura.
-- El notebook 04 no entrena modelos ni usa particiones aleatorias.
+- El notebook 04 entrena modelos solo si todas las puertas de calidad se
+  cumplen. No usa particiones aleatorias ni acepta machine learning si no supera
+  el baseline estacional en la prueba final.
 
 ## Validación en este repositorio
 

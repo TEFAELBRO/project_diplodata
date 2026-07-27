@@ -22,7 +22,9 @@
   solapamiento con Hurto a Personas.
 - Se agregaron controles de fechas, cantidades, duplicados y cobertura DANE.
 - El EDA se limitó a las preguntas 1–5, sin resultados inventados.
-- El modelado quedó bloqueado detrás de puertas de calidad y no entrena nada.
+- El modelado quedó condicionado por puertas de calidad. Cuando todas se
+  cumplen, compara dos modelos de machine learning con un baseline estacional
+  mediante validación temporal y una prueba final separada.
 - Los datos binarios de la plantilla se retiraron del seguimiento y las carpetas
   se conservan mediante archivos `.gitkeep`.
 

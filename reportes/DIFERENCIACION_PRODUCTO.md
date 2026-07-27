@@ -28,7 +28,7 @@ de Bucaramanga se describe como:
 |---|---|---|
 | Unidad espacial | Comuna | Ciudad, sin estimar riesgo por comuna o barrio |
 | Problema principal | Riesgo territorial y cantidad | Vigilancia temporal de reportes y calidad de la evidencia |
-| Alcance delictivo del modelo | No especificado en el chat | Un único objetivo candidato: homicidios mensuales |
+| Alcance delictivo del modelo | No especificado en el chat | Un único objetivo: homicidios reportados del próximo mes |
 | Valor distintivo | Priorización territorial | Trazabilidad, tasas comparables, señales temporales y validación reproducible |
 | Uso previsto | Planificación y prevención por territorio | Seguimiento periódico, planeación temporal y evaluación analítica |
 | Salvaguarda | No verificable con el chat | No inferir riesgo individual, no estigmatizar zonas y no automatizar despliegues |
@@ -58,8 +58,8 @@ temporal.
 - identificar años o tendencias que ameritan análisis contextual;
 - comparar tasas anuales con una base poblacional consistente;
 - definir si existe evidencia suficiente para diseñar un experimento predictivo;
-- planear revisiones mensuales de homicidios cuando el modelo futuro supere un
-  baseline y reporte incertidumbre.
+- planear revisiones mensuales de homicidios cuando el modelo supere un baseline
+  estacional en la prueba final y reporte incertidumbre.
 
 ## Decisiones que no debe automatizar
 
