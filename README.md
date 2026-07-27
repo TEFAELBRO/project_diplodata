@@ -1,4 +1,9 @@
-# Criminalidad reportada en Santiago de Cali
+# Vigía Cali
+
+**Sistema auditable de vigilancia temporal de la criminalidad reportada para la
+planeación institucional**
+
+**Autores:** completar manualmente antes de la entrega.
 
 Proyecto académico de ciencia de datos para auditar, preparar y explorar fuentes
 agregadas de SIEDCO y población municipal del DANE. La implementación actual

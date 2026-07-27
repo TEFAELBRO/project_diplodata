@@ -38,14 +38,19 @@ Bucaramanga con la cual verificar su implementación. Por eso, esta comparación
 valida la **diferencia de alcance declarada**, no una diferencia línea por línea
 entre ambos códigos.
 
-## Identidad recomendada
+## Identidad seleccionada
 
-**Sistema reproducible de vigilancia temporal de la criminalidad reportada en
-Santiago de Cali para apoyar la planeación y el seguimiento institucional.**
+**Vigía Cali: sistema auditable de vigilancia temporal de la criminalidad
+reportada para la planeación institucional.**
 
 La palabra “reportada” es importante: SIEDCO no representa necesariamente toda
 la criminalidad ocurrida. El sistema describe reportes agregados y hace visibles
 la cobertura, el denominador, el período y las limitaciones de cada resultado.
+
+El nombre evita los conceptos centrales de la propuesta de Bucaramanga
+—“riesgo por comuna” y “predicción de cantidad”— y pone en primer plano el
+atributo más sólido del producto: la evidencia auditable para seguimiento
+temporal.
 
 ## Decisiones que puede apoyar
 
@@ -66,7 +71,7 @@ la cobertura, el denominador, el período y las limitaciones de cada resultado.
 
 ## Mensaje breve para la sustentación
 
-> Nuestro producto no intenta replicar un mapa de riesgo por comuna. Se
+> Vigía Cali no intenta replicar un mapa de riesgo por comuna. Se
 > diferencia porque construye una cadena auditable para vigilar la evolución
 > temporal de la criminalidad reportada en Cali. Antes de predecir, valida
 > fuentes, códigos territoriales, cantidades, fechas, solapamientos y población.
