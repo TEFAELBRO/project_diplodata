@@ -78,6 +78,23 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# Operating-system and office temporary files
+.DS_Store
+~$*
+
+# Project data and generated analytical outputs
+data/raw/**
+data/landing/**
+data/trusted/**
+data/surface/**
+!data/raw/.gitkeep
+!data/landing/.gitkeep
+!data/trusted/.gitkeep
+!data/surface/.gitkeep
+
+# Local or exported project results
+project_diplodata_outputs/
+
 # IPython
 profile_default/
 ipython_config.py
